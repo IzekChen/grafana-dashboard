@@ -1,0 +1,1237 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 239,
+  "iteration": 1627971315553,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "dressly.ooapi.com: jenkins_build",
+      "decimals": 3,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 12,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.4",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "data.projectName.keyword",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "1",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": "1",
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "build_duration",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "data.projectName.keyword:$job AND message.keyword: Finished\\:* AND data.buildNum: $buildno AND data.result.keyword:$result",
+          "queryType": "randomWalk",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Build Duration Trend",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "ms",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 6,
+      "title": "Build Status",
+      "type": "row"
+    },
+    {
+      "aliasColors": {
+        "cron-detect-infringement": "dark-red"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "dressly.ooapi.com: jenkins_build",
+      "decimals": -1,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null,
+            "displayMode": "color-text"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 2,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "total",
+        "sortDesc": false,
+        "total": true,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null as zero",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.4",
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "data.projectName.keyword",
+              "id": "5",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "@timestamp",
+              "id": "4",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": "1",
+                "trimEdges": null
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "select field",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "count"
+            }
+          ],
+          "query": "data.projectName.keyword:$job AND message.keyword: Finished\\:* AND data.buildNum: $buildno AND data.result.keyword:$result",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Pipeline running status",
+      "tooltip": {
+        "shared": false,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "transformations": [],
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": "MetaQueries",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "align": null,
+            "displayMode": "color-text",
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Build Num"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 109
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Branch"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 117
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "stats"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 154
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Start Time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 165
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Project"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 273
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Build URL"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 1032
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Build URL"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "",
+                    "url": "${__data.fields[\"Build URL\"]}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "build_duration"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "ms"
+              },
+              {
+                "id": "custom.width",
+                "value": 205
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Start Time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 224
+              },
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "End Time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 216
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Status"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 93
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 2,
+      "options": {
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "7.3.4",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "@buildTimestamp",
+              "id": "4",
+              "settings": {
+                "interval": 1000,
+                "min_doc_count": 1
+              },
+              "type": "histogram"
+            }
+          ],
+          "datasource": "dressly.ooapi.com: jenkins_build",
+          "metrics": [
+            {
+              "field": "select field",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "logs"
+            }
+          ],
+          "query": "data.projectName.keyword:$job AND message.keyword: Finished\\:* AND data.buildNum: $buildno AND data.result.keyword:$result",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Pipeline running status",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "@buildTimestamp": false,
+              "@timestamp": false,
+              "@version": true,
+              "_id": true,
+              "_index": true,
+              "_source": true,
+              "_type": true,
+              "data.buildDuration": true,
+              "data.buildHost": true,
+              "data.buildLabel": true,
+              "data.buildVariables.ACTION": true,
+              "data.buildVariables.ACTIONS": true,
+              "data.buildVariables.AWS_ACCESS_KEY_ID_LOCAL_DEV": true,
+              "data.buildVariables.AWS_SECRET_ACCESS_KEY_LOCAL_DEV": true,
+              "data.buildVariables.BATCH": true,
+              "data.buildVariables.BRANCH": false,
+              "data.buildVariables.BRANCH_FROM": true,
+              "data.buildVariables.BUILD": true,
+              "data.buildVariables.BUILD_DISPLAY_NAME": true,
+              "data.buildVariables.BUILD_ID": true,
+              "data.buildVariables.BUILD_NUMBER": true,
+              "data.buildVariables.BUILD_TAG": true,
+              "data.buildVariables.BUILD_URL": false,
+              "data.buildVariables.CLASSPATH": true,
+              "data.buildVariables.CLEAN": true,
+              "data.buildVariables.CLEAN_REPO": true,
+              "data.buildVariables.COPY_FROM_STAGE": true,
+              "data.buildVariables.DELETE_EXISTING_BLANK": true,
+              "data.buildVariables.DELETE_PATH": true,
+              "data.buildVariables.DEPLOY": true,
+              "data.buildVariables.DEPLOY_CRON": true,
+              "data.buildVariables.DEPLOY_SERVICE": true,
+              "data.buildVariables.DISABLE_CAPTCHA_LOGIN": true,
+              "data.buildVariables.DOCKERFILE": true,
+              "data.buildVariables.DOCKER_TAG": true,
+              "data.buildVariables.EMAIL": true,
+              "data.buildVariables.ENABLE_MAXMIND": true,
+              "data.buildVariables.ENV": true,
+              "data.buildVariables.ES_ENV": true,
+              "data.buildVariables.EXECUTOR_NUMBER": true,
+              "data.buildVariables.EXTRA_ENV": true,
+              "data.buildVariables.FEATURE_BRANCH": true,
+              "data.buildVariables.FIX": true,
+              "data.buildVariables.FORCE_CLEAN": true,
+              "data.buildVariables.FORCE_COPY_FROM_STAGE": true,
+              "data.buildVariables.FORCE_RENDER": true,
+              "data.buildVariables.GRACEFUL_STOP": true,
+              "data.buildVariables.HOME": true,
+              "data.buildVariables.HUDSON_HOME": true,
+              "data.buildVariables.HUDSON_SERVER_COOKIE": true,
+              "data.buildVariables.HUDSON_URL": true,
+              "data.buildVariables.INSTALL": true,
+              "data.buildVariables.JENKINS_HOME": true,
+              "data.buildVariables.JENKINS_SERVER_COOKIE": true,
+              "data.buildVariables.JENKINS_URL": true,
+              "data.buildVariables.JOB_BASE_NAME": true,
+              "data.buildVariables.JOB_DISPLAY_URL": true,
+              "data.buildVariables.JOB_NAME": true,
+              "data.buildVariables.JOB_URL": true,
+              "data.buildVariables.K8S_NAMESPACE": true,
+              "data.buildVariables.LANG": true,
+              "data.buildVariables.LOCK_NAME": true,
+              "data.buildVariables.LOGNAME": true,
+              "data.buildVariables.LOG_LEVEL": true,
+              "data.buildVariables.MAIL": true,
+              "data.buildVariables.MESSAGE": true,
+              "data.buildVariables.NAMESPACE": true,
+              "data.buildVariables.NODE_ENV": true,
+              "data.buildVariables.NODE_LABELS": true,
+              "data.buildVariables.NODE_NAME": true,
+              "data.buildVariables.NOTIFY_SLACK": true,
+              "data.buildVariables.NPM_TOKEN_4873": true,
+              "data.buildVariables.NPM_TOKEN_4874": true,
+              "data.buildVariables.ORDER": true,
+              "data.buildVariables.PAJAMAS_DEPLOY_TO": true,
+              "data.buildVariables.PAJAMAS_TO_RUN": true,
+              "data.buildVariables.PATH": true,
+              "data.buildVariables.PERMISSION": true,
+              "data.buildVariables.PRODUCTS_TO_SKIP": true,
+              "data.buildVariables.PROJECT": true,
+              "data.buildVariables.PT_PRINT_SIZES_TO_SKIP": true,
+              "data.buildVariables.PULL": true,
+              "data.buildVariables.PWD": true,
+              "data.buildVariables.REPOSITORIES": true,
+              "data.buildVariables.RESTART": true,
+              "data.buildVariables.RUN_ARTIFACTS_DISPLAY_URL": true,
+              "data.buildVariables.RUN_CHANGES_DISPLAY_URL": true,
+              "data.buildVariables.RUN_DISPLAY_URL": true,
+              "data.buildVariables.RUN_TESTS_DISPLAY_URL": true,
+              "data.buildVariables.SELLER_EMAILS": true,
+              "data.buildVariables.SERVICE": true,
+              "data.buildVariables.SERVICES": true,
+              "data.buildVariables.SHELL": true,
+              "data.buildVariables.SHLVL": true,
+              "data.buildVariables.SKIP_PT_ORDERS": true,
+              "data.buildVariables.SLACK_CRASHES_CHANNEL": true,
+              "data.buildVariables.SLACK_TESTING_CHANNEL": true,
+              "data.buildVariables.SLACK_WARNINGS_CHANNEL": true,
+              "data.buildVariables.SL_EMAIL_BRANCH": true,
+              "data.buildVariables.SL_OPS_BRANCH": true,
+              "data.buildVariables.START_CONTAINER": true,
+              "data.buildVariables.STORE_HTML_REPORT": true,
+              "data.buildVariables.TANKTOP_DEPLOY_TO": true,
+              "data.buildVariables.TANKTOP_TO_POINT": true,
+              "data.buildVariables.TEMPLATE_NAMES": true,
+              "data.buildVariables.TERM": true,
+              "data.buildVariables.TEST_ORDERS": true,
+              "data.buildVariables.UPGRADE_IPS_DB": true,
+              "data.buildVariables.UPLOAD": true,
+              "data.buildVariables.USER": true,
+              "data.buildVariables.VERSION": true,
+              "data.buildVariables.XDG_RUNTIME_DIR": true,
+              "data.buildVariables.XDG_SESSION_ID": true,
+              "data.buildVariables._": true,
+              "data.displayName": true,
+              "data.fullDisplayName": true,
+              "data.fullProjectName": true,
+              "data.id": true,
+              "data.projectName": false,
+              "data.result": false,
+              "data.result.keyword": false,
+              "data.rootBuildNum": true,
+              "data.rootFullProjectName": true,
+              "data.rootProjectDisplayName": true,
+              "data.rootProjectName": true,
+              "data.sensitiveBuildVariables": true,
+              "data.url": true,
+              "host": true,
+              "message": true,
+              "port": true,
+              "source": true,
+              "source_host": true
+            },
+            "indexByName": {
+              "@buildTimestamp": 0,
+              "@timestamp": 1,
+              "@version": 8,
+              "_id": 9,
+              "_index": 10,
+              "_source": 11,
+              "_type": 12,
+              "build_duration": 5,
+              "data.buildDuration": 13,
+              "data.buildHost": 14,
+              "data.buildLabel": 15,
+              "data.buildNum": 4,
+              "data.buildVariables.BUILD_DISPLAY_NAME": 16,
+              "data.buildVariables.BUILD_ID": 17,
+              "data.buildVariables.BUILD_NUMBER": 18,
+              "data.buildVariables.BUILD_TAG": 19,
+              "data.buildVariables.BUILD_URL": 6,
+              "data.buildVariables.CLASSPATH": 20,
+              "data.buildVariables.EXECUTOR_NUMBER": 21,
+              "data.buildVariables.HOME": 22,
+              "data.buildVariables.HUDSON_HOME": 23,
+              "data.buildVariables.HUDSON_SERVER_COOKIE": 24,
+              "data.buildVariables.HUDSON_URL": 25,
+              "data.buildVariables.JENKINS_HOME": 26,
+              "data.buildVariables.JENKINS_SERVER_COOKIE": 27,
+              "data.buildVariables.JENKINS_URL": 28,
+              "data.buildVariables.JOB_BASE_NAME": 29,
+              "data.buildVariables.JOB_DISPLAY_URL": 30,
+              "data.buildVariables.JOB_NAME": 31,
+              "data.buildVariables.JOB_URL": 32,
+              "data.buildVariables.LANG": 33,
+              "data.buildVariables.LOGNAME": 34,
+              "data.buildVariables.MAIL": 35,
+              "data.buildVariables.NODE_LABELS": 36,
+              "data.buildVariables.NODE_NAME": 37,
+              "data.buildVariables.PATH": 38,
+              "data.buildVariables.PWD": 39,
+              "data.buildVariables.RUN_CHANGES_DISPLAY_URL": 40,
+              "data.buildVariables.RUN_DISPLAY_URL": 41,
+              "data.buildVariables.SHELL": 42,
+              "data.buildVariables.SHLVL": 43,
+              "data.buildVariables.TERM": 44,
+              "data.buildVariables.USER": 45,
+              "data.buildVariables.XDG_RUNTIME_DIR": 46,
+              "data.buildVariables.XDG_SESSION_ID": 47,
+              "data.buildVariables._": 48,
+              "data.displayName": 49,
+              "data.fullDisplayName": 50,
+              "data.fullProjectName": 51,
+              "data.id": 52,
+              "data.projectName": 2,
+              "data.result": 3,
+              "data.rootBuildNum": 53,
+              "data.rootFullProjectName": 54,
+              "data.rootProjectDisplayName": 55,
+              "data.rootProjectName": 56,
+              "data.sensitiveBuildVariables": 62,
+              "data.url": 57,
+              "host": 60,
+              "message": 7,
+              "port": 61,
+              "source": 58,
+              "source_host": 59
+            },
+            "renameByName": {
+              "@buildTimestamp": "Start Time",
+              "@timestamp": "End Time",
+              "build_duration": "",
+              "data.buildNum": "Build Num",
+              "data.buildVariables.BRANCH": "Branch",
+              "data.buildVariables.BRANCH.keyword": "Branch",
+              "data.buildVariables.BUILD_URL": "Build URL",
+              "data.buildVariables.BUILD_URL.keyword": "Build URL",
+              "data.projectName": "Project",
+              "data.projectName.keyword": "Project Name",
+              "data.result": "Status",
+              "data.result.keyword": "Status",
+              "message": "stats"
+            }
+          }
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "pattern": "/Start Time|End Time|Project|Build Num|Branch|Build URL|Status|duration/"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": "dressly.ooapi.com: jenkins_build",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "align": null,
+            "displayMode": "color-text",
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "@buildTimestamp"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 150
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "data.buildNum"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 108
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 10,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "@buildTimestamp"
+          }
+        ]
+      },
+      "pluginVersion": "7.3.4",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "@buildTimestamp",
+              "id": "2",
+              "settings": {
+                "min_doc_count": 0,
+                "order": "asc",
+                "orderBy": "1",
+                "size": "0"
+              },
+              "type": "terms"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "select field",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "logs"
+            }
+          ],
+          "query": "data.projectName.keyword:$job AND data.buildNum:$buildno",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Log details",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "@buildTimestamp": false,
+              "@timestamp": true,
+              "@version": true,
+              "_id": true,
+              "_index": true,
+              "_source": true,
+              "_type": true,
+              "data.buildDuration": true,
+              "data.buildHost": true,
+              "data.buildLabel": true,
+              "data.buildNum": false,
+              "data.buildVariables.ACTION": true,
+              "data.buildVariables.AWS_ACCESS_KEY_ID_LOCAL_DEV": true,
+              "data.buildVariables.AWS_SECRET_ACCESS_KEY_LOCAL_DEV": true,
+              "data.buildVariables.BRANCH": true,
+              "data.buildVariables.BUILD": true,
+              "data.buildVariables.BUILD_DISPLAY_NAME": true,
+              "data.buildVariables.BUILD_ID": true,
+              "data.buildVariables.BUILD_NUMBER": true,
+              "data.buildVariables.BUILD_TAG": true,
+              "data.buildVariables.BUILD_URL": true,
+              "data.buildVariables.CLASSPATH": true,
+              "data.buildVariables.CLEAN": true,
+              "data.buildVariables.COPY_FROM_STAGE": true,
+              "data.buildVariables.DOCKERFILE": true,
+              "data.buildVariables.DOCKER_TAG": true,
+              "data.buildVariables.ENABLE_MAXMIND": true,
+              "data.buildVariables.ENV": true,
+              "data.buildVariables.EXECUTOR_NUMBER": true,
+              "data.buildVariables.FORCE_COPY_FROM_STAGE": true,
+              "data.buildVariables.FORCE_RENDER": true,
+              "data.buildVariables.GRACEFUL_STOP": true,
+              "data.buildVariables.HOME": true,
+              "data.buildVariables.HUDSON_HOME": true,
+              "data.buildVariables.HUDSON_SERVER_COOKIE": true,
+              "data.buildVariables.HUDSON_URL": true,
+              "data.buildVariables.INSTALL": true,
+              "data.buildVariables.JENKINS_HOME": true,
+              "data.buildVariables.JENKINS_SERVER_COOKIE": true,
+              "data.buildVariables.JENKINS_URL": true,
+              "data.buildVariables.JOB_BASE_NAME": true,
+              "data.buildVariables.JOB_DISPLAY_URL": true,
+              "data.buildVariables.JOB_NAME": true,
+              "data.buildVariables.JOB_URL": true,
+              "data.buildVariables.K8S_NAMESPACE": true,
+              "data.buildVariables.LANG": true,
+              "data.buildVariables.LOGNAME": true,
+              "data.buildVariables.LOG_LEVEL": true,
+              "data.buildVariables.MAIL": true,
+              "data.buildVariables.NODE_LABELS": true,
+              "data.buildVariables.NODE_NAME": true,
+              "data.buildVariables.NOTIFY_SLACK": true,
+              "data.buildVariables.NPM_TOKEN_4873": true,
+              "data.buildVariables.NPM_TOKEN_4874": true,
+              "data.buildVariables.PAJAMAS_DEPLOY_TO": true,
+              "data.buildVariables.PATH": true,
+              "data.buildVariables.PERMISSION": true,
+              "data.buildVariables.PROJECT": true,
+              "data.buildVariables.PULL": true,
+              "data.buildVariables.PWD": true,
+              "data.buildVariables.RESTART": true,
+              "data.buildVariables.RUN_ARTIFACTS_DISPLAY_URL": true,
+              "data.buildVariables.RUN_CHANGES_DISPLAY_URL": true,
+              "data.buildVariables.RUN_DISPLAY_URL": true,
+              "data.buildVariables.RUN_TESTS_DISPLAY_URL": true,
+              "data.buildVariables.SELLER_EMAILS": true,
+              "data.buildVariables.SERVICE": true,
+              "data.buildVariables.SHELL": true,
+              "data.buildVariables.SHLVL": true,
+              "data.buildVariables.SSH_CLIENT": true,
+              "data.buildVariables.SSH_CONNECTION": true,
+              "data.buildVariables.STORE_HTML_REPORT": true,
+              "data.buildVariables.TEMPLATE_NAMES": true,
+              "data.buildVariables.TERM": true,
+              "data.buildVariables.UPGRADE_IPS_DB": true,
+              "data.buildVariables.USER": true,
+              "data.buildVariables.VERSION": true,
+              "data.buildVariables.XDG_RUNTIME_DIR": true,
+              "data.buildVariables.XDG_SESSION_ID": true,
+              "data.buildVariables._": true,
+              "data.buildVariables.library.SPLibrary.version": true,
+              "data.description": true,
+              "data.displayName": true,
+              "data.fullDisplayName": true,
+              "data.fullProjectName": true,
+              "data.id": true,
+              "data.projectName": true,
+              "data.result": true,
+              "data.result.keyword": false,
+              "data.rootBuildNum": true,
+              "data.rootFullProjectName": true,
+              "data.rootProjectDisplayName": true,
+              "data.rootProjectName": true,
+              "data.sensitiveBuildVariables": true,
+              "data.url": true,
+              "host": false,
+              "message": false,
+              "port": true,
+              "source": true,
+              "source_host": true
+            },
+            "indexByName": {
+              "@buildTimestamp": 0,
+              "@timestamp": 7,
+              "@version": 8,
+              "_id": 9,
+              "_index": 10,
+              "_source": 11,
+              "_type": 12,
+              "data.buildDuration": 13,
+              "data.buildHost": 14,
+              "data.buildLabel": 15,
+              "data.buildNum": 2,
+              "data.buildVariables.AWS_ACCESS_KEY_ID_LOCAL_DEV": 16,
+              "data.buildVariables.AWS_SECRET_ACCESS_KEY_LOCAL_DEV": 17,
+              "data.buildVariables.BRANCH": 3,
+              "data.buildVariables.BUILD_DISPLAY_NAME": 18,
+              "data.buildVariables.BUILD_ID": 19,
+              "data.buildVariables.BUILD_NUMBER": 20,
+              "data.buildVariables.BUILD_TAG": 21,
+              "data.buildVariables.BUILD_URL": 4,
+              "data.buildVariables.CLASSPATH": 22,
+              "data.buildVariables.DOCKERFILE": 23,
+              "data.buildVariables.DOCKER_TAG": 24,
+              "data.buildVariables.EXECUTOR_NUMBER": 25,
+              "data.buildVariables.HOME": 26,
+              "data.buildVariables.HUDSON_HOME": 27,
+              "data.buildVariables.HUDSON_SERVER_COOKIE": 28,
+              "data.buildVariables.HUDSON_URL": 29,
+              "data.buildVariables.JENKINS_HOME": 30,
+              "data.buildVariables.JENKINS_SERVER_COOKIE": 31,
+              "data.buildVariables.JENKINS_URL": 32,
+              "data.buildVariables.JOB_BASE_NAME": 33,
+              "data.buildVariables.JOB_DISPLAY_URL": 34,
+              "data.buildVariables.JOB_NAME": 35,
+              "data.buildVariables.JOB_URL": 36,
+              "data.buildVariables.K8S_NAMESPACE": 68,
+              "data.buildVariables.LANG": 37,
+              "data.buildVariables.LOGNAME": 38,
+              "data.buildVariables.MAIL": 39,
+              "data.buildVariables.NODE_LABELS": 40,
+              "data.buildVariables.NODE_NAME": 41,
+              "data.buildVariables.NOTIFY_SLACK": 69,
+              "data.buildVariables.NPM_TOKEN_4873": 42,
+              "data.buildVariables.NPM_TOKEN_4874": 43,
+              "data.buildVariables.PATH": 44,
+              "data.buildVariables.PULL": 45,
+              "data.buildVariables.PWD": 46,
+              "data.buildVariables.RUN_CHANGES_DISPLAY_URL": 47,
+              "data.buildVariables.RUN_DISPLAY_URL": 48,
+              "data.buildVariables.SHELL": 49,
+              "data.buildVariables.SHLVL": 50,
+              "data.buildVariables.STORE_HTML_REPORT": 70,
+              "data.buildVariables.TERM": 51,
+              "data.buildVariables.USER": 52,
+              "data.buildVariables.VERSION": 71,
+              "data.buildVariables.XDG_RUNTIME_DIR": 53,
+              "data.buildVariables.XDG_SESSION_ID": 54,
+              "data.buildVariables._": 55,
+              "data.displayName": 56,
+              "data.fullDisplayName": 57,
+              "data.fullProjectName": 58,
+              "data.id": 59,
+              "data.projectName": 1,
+              "data.result": 5,
+              "data.rootBuildNum": 60,
+              "data.rootFullProjectName": 61,
+              "data.rootProjectDisplayName": 62,
+              "data.rootProjectName": 63,
+              "data.sensitiveBuildVariables": 64,
+              "data.url": 65,
+              "message": 6,
+              "source": 66,
+              "source_host": 67
+            },
+            "renameByName": {
+              "@buildTimestamp": "",
+              "data.buildNum": "",
+              "data.buildVariables.BRANCH": "",
+              "data.buildVariables.BRANCH.keyword": "Branch",
+              "data.buildVariables.BUILD_URL": "",
+              "data.buildVariables.BUILD_URL.keyword": "Build URL",
+              "data.projectName": "",
+              "data.projectName.keyword": "Project Name",
+              "data.result": "",
+              "data.result.keyword": "Status",
+              "message": "stats"
+            }
+          }
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "pattern": "/@buildTimestamp|data.buildNum|stats/"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": [
+    "Jenkins Job build",
+    "SRE"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "https://coaster.ooapi.com/"
+          ],
+          "value": [
+            "https://coaster.ooapi.com/"
+          ]
+        },
+        "datasource": "dressly.ooapi.com: jenkins_build",
+        "definition": "{\"find\":\"terms\",\"field\":\"source_host.keyword\"}",
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Host",
+        "multi": true,
+        "name": "host",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"source_host.keyword\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "dressly.ooapi.com: jenkins_build",
+        "definition": "{\"find\":\"terms\",\"field\":\"data.projectName.keyword\",\"query\": \"source_host.keyword:$host AND data.result.keyword:$result\", \"size\": 3000}",
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": true,
+        "name": "job",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"data.projectName.keyword\",\"query\": \"source_host.keyword:$host AND data.result.keyword:$result\", \"size\": 3000}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "dressly.ooapi.com: jenkins_build",
+        "definition": "{\"find\":\"terms\",\"field\":\"data.buildNum\",\"query\": \"data.projectName.keyword:$job AND data.result.keyword:$result\"}",
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Build Number",
+        "multi": true,
+        "name": "buildno",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"data.buildNum\",\"query\": \"data.projectName.keyword:$job AND data.result.keyword:$result\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "datasource": "MetaQueries",
+        "error": null,
+        "filters": [],
+        "hide": 0,
+        "label": null,
+        "name": "Filters",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "dressly.ooapi.com: jenkins_build",
+        "definition": "{\"find\":\"terms\",\"field\":\"data.result.keyword\"}",
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Result",
+        "multi": true,
+        "name": "result",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"data.result.keyword\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-2d",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "Jenkins Job status",
+  "uid": "0jti9oTMk",
+  "version": 55
+}
