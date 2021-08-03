@@ -1,0 +1,5495 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 1,
+  "id": 206,
+  "iteration": 1627971048314,
+  "links": [
+    {
+      "icon": "dashboard",
+      "keepTime": true,
+      "tags": [],
+      "targetBlank": true,
+      "title": "Alert Dashboard",
+      "type": "link",
+      "url": "https://grafana.ooapi.com/d/QyadDh-Gz/sp-alert-dashboard"
+    },
+    {
+      "icon": "doc",
+      "tags": [],
+      "targetBlank": true,
+      "title": "SRE Confluence",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://scalablepress.atlassian.net/wiki/spaces/~260095527/overview"
+    },
+    {
+      "icon": "external link",
+      "tags": [],
+      "targetBlank": true,
+      "title": "Dressly",
+      "type": "link",
+      "url": "https://dressly.ooapi.com/app/kibana"
+    },
+    {
+      "icon": "dashboard",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [],
+      "targetBlank": false,
+      "title": "OS stat",
+      "type": "link",
+      "url": "https://grafana.ooapi.com/d/100000033/os-stats-linux?orgId=1&refresh=1m"
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "Jenkins Job build"
+      ],
+      "targetBlank": true,
+      "type": "dashboards"
+    },
+    {
+      "icon": "dashboard",
+      "tags": [],
+      "targetBlank": true,
+      "title": "Regional performance dashboard",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://grafana.ooapi.com/d/E9q-hE3Gz/regional-performance-analytic-test"
+    }
+  ],
+  "panels": [
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 33,
+      "title": "Uptime",
+      "type": "row"
+    },
+    {
+      "datasource": "dressly.ooapi.com: heartbeat-uptime",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": [
+            {
+              "title": "Uptime details",
+              "url": "https://grafana.ooapi.com/d/2XGpswtGz/sli-uptime?orgId=1"
+            },
+            {
+              "targetBlank": true,
+              "title": "ELK teechip uptime detail",
+              "url": "https://dressly.ooapi.com/app/uptime#/monitor/teechip-uptime?_g=()"
+            }
+          ],
+          "mappings": [
+            {
+              "from": "",
+              "id": 0,
+              "text": "Down",
+              "to": "",
+              "type": 1,
+              "value": "0"
+            },
+            {
+              "from": "",
+              "id": 1,
+              "text": "UP",
+              "to": "",
+              "type": 1,
+              "value": "1"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "id": 36,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "summary.up",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "target: \"teechip_uptime\"",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Teechip Site Status",
+      "type": "stat"
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                1
+              ],
+              "type": "lt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "1m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "last"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "2m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "Site is down",
+        "name": "Teechip Uptime alert",
+        "noDataState": "no_data",
+        "notifications": [
+          {
+            "uid": "asza7qKMk"
+          }
+        ]
+      },
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "dressly.ooapi.com: heartbeat-uptime",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": [
+            {
+              "title": "Uptime details",
+              "url": "https://grafana.ooapi.com/d/2XGpswtGz/sli-uptime?orgId=1"
+            },
+            {
+              "title": "ELK teechip uptime detail",
+              "url": "https://dressly.ooapi.com/app/uptime#/monitor/teechip-uptime?_g=()"
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 20,
+        "x": 4,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 35,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null as zero",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.4",
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1m",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "summary.up",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "target: \"teechip_uptime\"",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "lt",
+          "value": 1
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Teechip Uptime",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": "MetaQueries",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "links": [
+            {
+              "title": "Uptime details",
+              "url": "https://grafana.ooapi.com/d/2XGpswtGz/sli-uptime?orgId=1"
+            },
+            {
+              "targetBlank": true,
+              "title": "ELK teechip uptime detail",
+              "url": "https://dressly.ooapi.com/app/uptime#/monitor/teechip-uptime?_g=()"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.995
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Uptime(%)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "decimals",
+                "value": 3
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 0,
+        "y": 4
+      },
+      "id": 62,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "targets": [
+        {
+          "alias": "timeUp",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "$Interval",
+                "min_doc_count": "1",
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "hide": true,
+          "metrics": [
+            {
+              "field": "summary.up",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "target: \"teechip_uptime\"",
+          "refId": "A",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "timeDown",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "$Interval",
+                "min_doc_count": "1",
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "hide": true,
+          "metrics": [
+            {
+              "field": "summary.down",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "target: \"teechip_uptime\"",
+          "refId": "B",
+          "timeField": "@timestamp"
+        },
+        {
+          "datasource": "MetaQueries",
+          "expression": "(A['timeUp']/(A['timeUp'] + B['timeDown']))*100",
+          "outputMetricName": "Uptime(%)",
+          "periods": 7,
+          "queryType": "Arithmetic",
+          "refId": "C",
+          "timeshiftUnit": "days"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Teechip Uptime Availability",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 18,
+      "title": "Buyer Side",
+      "type": "row"
+    },
+    {
+      "datasource": "dressly.ooapi.com: observability metrics",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 3,
+          "links": [
+            {
+              "title": "Site Availability Details",
+              "url": "https://grafana.ooapi.com/d/wUqDxfpGk/sli-site-availability?orgId=1"
+            },
+            {
+              "targetBlank": true,
+              "title": "User Checkout",
+              "url": "https://grafana.ooapi.com/d/dsafp7SMk/user-checkout?orgId=1"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.9985
+              },
+              {
+                "color": "green",
+                "value": 0.999
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 8
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "$Interval",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "availability_rate.availability_rate",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "element.keyword:site_availability",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Site Availability",
+      "type": "stat"
+    },
+    {
+      "datasource": "dressly.ooapi.com: observability metrics",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 2,
+          "links": [
+            {
+              "title": "Site Latency Details",
+              "url": "https://grafana.ooapi.com/d/GAkTbftMk/sli-site-latency?orgId=1"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.6
+              },
+              {
+                "color": "red",
+                "value": 0.85
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 6,
+        "y": 8
+      },
+      "id": 15,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "$Interval",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "latency.avg",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "element.keyword:site_latency AND NOT latency.avg:0",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Site Latency",
+      "type": "stat"
+    },
+    {
+      "datasource": "dressly.ooapi.com: observability metrics",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 3,
+          "links": [
+            {
+              "title": "Conversion Availability Details",
+              "url": "https://grafana.ooapi.com/d/Pi3b0fpMz/sli-conversion-availability?orgId=1"
+            },
+            {
+              "targetBlank": true,
+              "title": "Runbook: User Checkout",
+              "url": "https://scalablepress.atlassian.net/wiki/spaces/TEECHIP/pages/259063970/Runbook+User+Checkout"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.99
+              },
+              {
+                "color": "green",
+                "value": 0.995
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 12,
+        "y": 8
+      },
+      "id": 2,
+      "links": [],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "repeat": "element",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "$Interval",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "availability_rate.availability_rate",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "element.keyword:conversion_availability",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Conversion Availability",
+      "type": "stat"
+    },
+    {
+      "datasource": "dressly.ooapi.com: observability metrics",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 3,
+          "links": [
+            {
+              "title": "Conversion Latency Details",
+              "url": "https://grafana.ooapi.com/d/CarZbBpMz/sli-conversion-latency?orgId=1"
+            },
+            {
+              "targetBlank": true,
+              "title": "Runbook: User Checkout",
+              "url": "https://scalablepress.atlassian.net/wiki/spaces/TEECHIP/pages/259063970/Runbook+User+Checkout"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 2.8
+              },
+              {
+                "color": "red",
+                "value": 3.2
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 18,
+        "y": 8
+      },
+      "id": 23,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "$Interval",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "latency.avg",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "element.keyword: conversion_latency AND NOT latency.avg:0",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Conversion Latency",
+      "type": "stat"
+    },
+    {
+      "datasource": "dressly.ooapi.com: observability metrics",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 2,
+          "links": [
+            {
+              "title": "Mockup Service Availability Details",
+              "url": "https://grafana.ooapi.com/d/kZkBbftMz/sli-mockup-service-availability?orgId=1"
+            },
+            {
+              "targetBlank": true,
+              "title": "Runbook: Mockup Generation",
+              "url": "https://scalablepress.atlassian.net/wiki/spaces/TEECHIP/pages/388595864/Runbook+Mockup+generation"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.9985
+              },
+              {
+                "color": "green",
+                "value": 0.999
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 14
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "$Interval",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "availability_rate.availability_rate",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "element.keyword: mockup_availability",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Mockup Service Availability",
+      "type": "stat"
+    },
+    {
+      "datasource": "dressly.ooapi.com: observability metrics",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "decimals": 2,
+          "links": [
+            {
+              "title": "OObilling Availability Details",
+              "url": "https://grafana.ooapi.com/d/_DOO-fpGk/sli-oobilling-availability?orgId=1"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.9985
+              },
+              {
+                "color": "green",
+                "value": 0.999
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 6,
+        "y": 14
+      },
+      "id": 24,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "$Interval",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "availability_rate.availability_rate",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "element.keyword: oobilling_availability",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "OObilling Availability",
+      "type": "stat"
+    },
+    {
+      "datasource": "dressly.ooapi.com: observability metrics",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 2,
+          "links": [
+            {
+              "title": "Profit Stats Latency Details",
+              "url": "https://grafana.ooapi.com/d/uF3jfBpGk/sli-profit-stats-latency?orgId=1"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 120
+              },
+              {
+                "color": "red",
+                "value": 138
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 12,
+        "y": 14
+      },
+      "id": 27,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "$Interval",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "latency.avg",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "element.keyword: profit_stats_latency AND NOT latency.avg:0",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Profit stats latency",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 20,
+      "panels": [],
+      "title": "Seller Side",
+      "type": "row"
+    },
+    {
+      "datasource": "dressly.ooapi.com: observability metrics",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 2,
+          "links": [
+            {
+              "title": "Campaign Creation Availability Details",
+              "url": "https://grafana.ooapi.com/d/CZwq-BtGz/sli-campaign-creation-availability?orgId=1"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.9985
+              },
+              {
+                "color": "green",
+                "value": 0.999
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 21
+      },
+      "id": 25,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "$Interval",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "availability_rate.availability_rate",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "element.keyword: campaign_creation_availability",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "\bCampaign Creation Availability",
+      "type": "stat"
+    },
+    {
+      "datasource": "dressly.ooapi.com: observability metrics",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 2,
+          "links": [
+            {
+              "title": "Seller Dashboard Latency Details",
+              "url": "https://grafana.ooapi.com/d/oQXifBtGk/sli-seller-dashboard-latency?orgId=1"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.4
+              },
+              {
+                "color": "red",
+                "value": 0.6
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 6,
+        "y": 21
+      },
+      "id": 26,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "$Interval",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "latency.avg",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "element.keyword:seller_dashboard_latency AND NOT latency.avg:0",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Seller Dashboard Latency",
+      "type": "stat"
+    },
+    {
+      "datasource": "dressly.ooapi.com: observability metrics",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 2,
+          "links": [
+            {
+              "title": "Profit Stats Availability Details",
+              "url": "https://grafana.ooapi.com/d/ptQ4fftMk/sli-profit-stats-availability?orgId=1&var-Interval=10m&var-environment=custom&from=now-3h&to=now"
+            }
+          ],
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.99
+              },
+              {
+                "color": "green",
+                "value": 0.995
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 12,
+        "y": 21
+      },
+      "id": 28,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "$Interval",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "availability_rate.availability_rate",
+              "id": "1",
+              "meta": {},
+              "settings": {
+                "missing": null
+              },
+              "type": "avg"
+            }
+          ],
+          "query": "element.keyword:profit_stats_availability",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Profit Stats Availability",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 27
+      },
+      "id": 22,
+      "panels": [],
+      "title": "Other systems",
+      "type": "row"
+    },
+    {
+      "datasource": "dressly.ooapi.com: observability metrics",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 2,
+          "links": [
+            {
+              "title": "TC Card Availability Details",
+              "url": "https://grafana.ooapi.com/d/gnp1SfFGk/tc-card-observation?orgId=1"
+            },
+            {
+              "targetBlank": true,
+              "title": "Runbook: TC Card",
+              "url": "https://scalablepress.atlassian.net/wiki/spaces/TEECHIP/pages/377782856/Runbook+TC+Card"
+            },
+            {
+              "title": "TC Card Alerting",
+              "url": "https://grafana.ooapi.com/d/_ltyM3KGz/tc-card-alerting?orgId=1&refresh=1m"
+            }
+          ],
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.9995
+              },
+              {
+                "color": "green",
+                "value": 0.9999
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 28
+      },
+      "id": 29,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "$Interval",
+                "min_doc_count": "1",
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "availability_rate.availability_rate",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "element.keyword: tccard_availability",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "TC Card availability",
+      "type": "stat"
+    },
+    {
+      "datasource": "dressly.ooapi.com: observability metrics",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 2,
+          "links": [
+            {
+              "title": "TC Card Latency Detail",
+              "url": "https://grafana.ooapi.com/d/-Y_dLftGk/sli-tc-card-latency?orgId=1"
+            },
+            {
+              "targetBlank": true,
+              "title": "Runbook: TC Card",
+              "url": "https://scalablepress.atlassian.net/wiki/spaces/TEECHIP/pages/377782856/Runbook+TC+Card"
+            }
+          ],
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.6
+              },
+              {
+                "color": "red",
+                "value": 1.6
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 6,
+        "y": 28
+      },
+      "id": 30,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "1",
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "latency.avg",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "element.keyword: tccard_latency AND NOT latency.avg:0",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "TC Card latency",
+      "type": "stat"
+    },
+    {
+      "datasource": "dressly.ooapi.com: custom-metrics-prod",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "decimals": 2,
+          "links": [
+            {
+              "title": "Email Marketing",
+              "url": "https://grafana.ooapi.com/d/bpQr7uDGz/email-marketing?orgId=1"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 12,
+        "y": 28
+      },
+      "id": 31,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.4",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "$Interval",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "value",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "element_type.keyword:sl-email-marketing-send AND status:failed",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Customer emails being failed",
+      "type": "stat"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 34
+      },
+      "id": 38,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 0,
+            "y": 35
+          },
+          "hiddenSeries": false,
+          "id": 42,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeat": "service",
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-dashboard",
+              "value": "sl-dashboard"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 6,
+            "y": 35
+          },
+          "hiddenSeries": false,
+          "id": 63,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-email",
+              "value": "sl-email"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 12,
+            "y": 35
+          },
+          "hiddenSeries": false,
+          "id": 64,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-retail-bots",
+              "value": "sl-retail-bots"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 18,
+            "y": 35
+          },
+          "hiddenSeries": false,
+          "id": 65,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-retail-custom",
+              "value": "sl-retail-custom"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 0,
+            "y": 42
+          },
+          "hiddenSeries": false,
+          "id": 66,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-retail-debug",
+              "value": "sl-retail-debug"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 6,
+            "y": 42
+          },
+          "hiddenSeries": false,
+          "id": 67,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-retail-teechip",
+              "value": "sl-retail-teechip"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 12,
+            "y": 42
+          },
+          "hiddenSeries": false,
+          "id": 68,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "fruit4k-old",
+              "value": "fruit4k-old"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 18,
+            "y": 42
+          },
+          "hiddenSeries": false,
+          "id": 69,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-manager",
+              "value": "sl-manager"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 0,
+            "y": 49
+          },
+          "hiddenSeries": false,
+          "id": 70,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-marketing",
+              "value": "sl-marketing"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 6,
+            "y": 49
+          },
+          "hiddenSeries": false,
+          "id": 71,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-analytics",
+              "value": "sl-analytics"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 12,
+            "y": 49
+          },
+          "hiddenSeries": false,
+          "id": 72,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-report",
+              "value": "sl-report"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 18,
+            "y": 49
+          },
+          "hiddenSeries": false,
+          "id": 73,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-rewards",
+              "value": "sl-rewards"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 0,
+            "y": 56
+          },
+          "hiddenSeries": false,
+          "id": 74,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-retail-user",
+              "value": "sl-retail-user"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 6,
+            "y": 56
+          },
+          "hiddenSeries": false,
+          "id": 75,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-cash-rewards",
+              "value": "sl-cash-rewards"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 12,
+            "y": 56
+          },
+          "hiddenSeries": false,
+          "id": 76,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-catalog",
+              "value": "sl-catalog"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 18,
+            "y": 56
+          },
+          "hiddenSeries": false,
+          "id": 77,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-gateway",
+              "value": "sl-gateway"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 0,
+            "y": 63
+          },
+          "hiddenSeries": false,
+          "id": 78,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-discounts",
+              "value": "sl-discounts"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 6,
+            "y": 63
+          },
+          "hiddenSeries": false,
+          "id": 79,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-seller-manager",
+              "value": "sl-seller-manager"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 12,
+            "y": 63
+          },
+          "hiddenSeries": false,
+          "id": 80,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-campain",
+              "value": "sl-campain"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "dressly.ooapi.com: heartbeat-uptime",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "links": [
+                {
+                  "title": "$service link",
+                  "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+                }
+              ],
+              "mappings": [
+                {
+                  "from": "",
+                  "id": 1,
+                  "text": "Down",
+                  "to": "",
+                  "type": 1,
+                  "value": "0"
+                },
+                {
+                  "from": "",
+                  "id": 2,
+                  "text": "UP",
+                  "to": "",
+                  "type": 1,
+                  "value": "1"
+                }
+              ],
+              "noValue": "No Data",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 18,
+            "y": 63
+          },
+          "hiddenSeries": false,
+          "id": 81,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "$service link",
+              "url": "https://grafana.ooapi.com/d/2YL_zHJGz/sl-service-dashboard?orgId=1&var-service=${service}"
+            }
+          ],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.4",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatIteration": 1611242472189,
+          "repeatPanelId": 42,
+          "scopedVars": {
+            "service": {
+              "selected": true,
+              "text": "sl-stripe-issuing",
+              "value": "sl-stripe-issuing"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "bucketAggs": [
+                {
+                  "field": "@timestamp",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1m",
+                    "min_doc_count": 0,
+                    "trimEdges": 0
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "summary.up",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "monitor.id:$service-uptime",
+              "queryType": "randomWalk",
+              "refId": "A",
+              "timeField": "@timestamp"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$service status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Site status",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "MicroServices",
+      "type": "row"
+    }
+  ],
+  "refresh": "1m",
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": [
+    "SRE",
+    "SLI",
+    "Observability"
+  ],
+  "templating": {
+    "list": [
+      {
+        "auto": true,
+        "auto_count": 30,
+        "auto_min": "10s",
+        "current": {
+          "selected": false,
+          "text": "10m",
+          "value": "10m"
+        },
+        "error": null,
+        "hide": 0,
+        "label": "Interval",
+        "name": "Interval",
+        "options": [
+          {
+            "selected": false,
+            "text": "auto",
+            "value": "$__auto_interval_Interval"
+          },
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "5m",
+            "value": "5m"
+          },
+          {
+            "selected": true,
+            "text": "10m",
+            "value": "10m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": false,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          },
+          {
+            "selected": false,
+            "text": "7d",
+            "value": "7d"
+          },
+          {
+            "selected": false,
+            "text": "14d",
+            "value": "14d"
+          }
+        ],
+        "query": "1m,5m, 10m,30m,1h,6h,12h,1d,7d,14d",
+        "queryValue": "",
+        "refresh": 2,
+        "skipUrlSync": false,
+        "type": "interval"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "sl-dashboard",
+          "value": "sl-dashboard"
+        },
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": true,
+        "name": "service",
+        "options": [
+          {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "sl-dashboard",
+            "value": "sl-dashboard"
+          },
+          {
+            "selected": false,
+            "text": "sl-email",
+            "value": "sl-email"
+          },
+          {
+            "selected": false,
+            "text": "sl-retail-production-bots",
+            "value": "sl-retail-production-bots"
+          },
+          {
+            "selected": true,
+            "text": "sl-retail-production-custom",
+            "value": "sl-retail-production-custom"
+          },
+          {
+            "selected": false,
+            "text": "sl-retail-production-teechip",
+            "value": "sl-retail-production-teechip"
+          },
+          {
+            "selected": false,
+            "text": "fruit4k-old",
+            "value": "fruit4k-old"
+          },
+          {
+            "selected": false,
+            "text": "sl-manager",
+            "value": "sl-manager"
+          },
+          {
+            "selected": false,
+            "text": "sl-marketing",
+            "value": "sl-marketing"
+          },
+          {
+            "selected": false,
+            "text": "sl-analytics",
+            "value": "sl-analytics"
+          },
+          {
+            "selected": false,
+            "text": "sl-report",
+            "value": "sl-report"
+          },
+          {
+            "selected": false,
+            "text": "sl-rewards",
+            "value": "sl-rewards"
+          },
+          {
+            "selected": false,
+            "text": "sl-retail-user",
+            "value": "sl-retail-user"
+          },
+          {
+            "selected": false,
+            "text": "sl-cash-rewards",
+            "value": "sl-cash-rewards"
+          },
+          {
+            "selected": false,
+            "text": "sl-catalog",
+            "value": "sl-catalog"
+          },
+          {
+            "selected": false,
+            "text": "sl-gateway",
+            "value": "sl-gateway"
+          },
+          {
+            "selected": false,
+            "text": "sl-discounts",
+            "value": "sl-discounts"
+          },
+          {
+            "selected": false,
+            "text": "sl-seller-manager",
+            "value": "sl-seller-manager"
+          },
+          {
+            "selected": false,
+            "text": "sl-campaign",
+            "value": "sl-campaign"
+          },
+          {
+            "selected": false,
+            "text": "sl-stripe-issuing",
+            "value": "sl-stripe-issuing"
+          }
+        ],
+        "query": "sl-dashboard, sl-email, sl-retail-production-bots, sl-retail-production-custom, sl-retail-production-teechip, fruit4k-old, sl-manager, sl-marketing, sl-analytics, sl-report, sl-rewards, sl-retail-user, sl-cash-rewards, sl-catalog, sl-gateway, sl-discounts, sl-seller-manager, sl-campaign, sl-stripe-issuing",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-12h",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": false,
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "Asia/Taipei",
+  "title": "SLO Dashboard",
+  "uid": "eNTkiftMk",
+  "version": 156
+}
